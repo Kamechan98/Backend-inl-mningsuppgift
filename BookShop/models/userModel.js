@@ -49,6 +49,3 @@ exports.login = async (req, res) => {
 
               res.status(201).json({ token: auth.generateToken(user) })
 }
-
-
-

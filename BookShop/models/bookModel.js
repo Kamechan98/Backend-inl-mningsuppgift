@@ -1,17 +1,5 @@
 const Book = require('../schemas/bookSchema');
 
-// exports.getAllBooks = (req, res) => {
-//     Book.find()
-//     .then(books => res.status(200).json(books))
-// }
-
-//   exports.getBookById = (req, res) => {
-//     Book.findById(req.params.id)
-//       .then(data => {
-//         res.status(200).json(data)
-//     })
-// }
-
 exports.addBook = async (req, res) => {
 
     const { name, description, price, imgURL } = req.body;
