@@ -4,13 +4,13 @@ const Book = require('../schemas/bookSchema');
 //Funktion för att lägga till böcker
 exports.addBook = async (req, res) => {
 
-    const { name, description, price, imgURL } = req.body;
+    const { name, author, year, description, price, imgURL } = req.body;
 
-    if(!name || !description ||!price || !imgURL) {
+    if(!name || !author || !year || !description ||!price || !imgURL) {
         return res.status(400).json({ message: 'You need to enter all fields' })
     }
 
-    const book = await Book.create({ name, description, price, imgURL })
+    const book = await Book.create({ name, author, year, description, price, imgURL })
 
     if(!book) {
         return res.status(500).json({ message: 'Something went wrong when adding the book' })
