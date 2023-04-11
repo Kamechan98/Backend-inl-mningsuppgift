@@ -1,5 +1,7 @@
 const Book = require('../schemas/bookSchema');
 
+
+//Funktion för att lägga till böcker
 exports.addBook = async (req, res) => {
 
     const { name, description, price, imgURL } = req.body;
@@ -16,7 +18,7 @@ exports.addBook = async (req, res) => {
     res.status(201).json(book)
 
 }
-
+//Funktion för att hämta alla böcker på sidan
 exports.getBooks = async (req, res) => {
 
     const books = await Book.find()
@@ -24,6 +26,7 @@ exports.getBooks = async (req, res) => {
     .catch (() => res.status(500).json ({ message: 'Something went wrong'}))
 }
 
+//Funktion för att hämta specifik bok på sidan med id
 exports.getBooksById = async (req, res) => {
 
     const book = await Book.findById(req.params.id)
@@ -33,7 +36,7 @@ exports.getBooksById = async (req, res) => {
     }
     res.status(200).json(book)
 }
-
+//Funktion för att hämta och uppdatera böcker på sidan med hjälp av id
 exports.updateBooks = async (req, res) => {
 
     const book = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true })
@@ -44,7 +47,7 @@ exports.updateBooks = async (req, res) => {
     res.status(200).json(book)    
 
 }
-
+//Funktion för att ta bort bok på sidan med hjälp av id
 exports.deleteBook = async (req, res) => {
 
     const book = await Book.findByIdAndDelete(req.params.id)

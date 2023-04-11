@@ -2,7 +2,7 @@ const User = require('../schemas/userSchema');
 const bcrypt = require('bcryptjs');
 const auth = require('../authentication/auth');
 
-
+//Funktion som lägger till en användare
 exports.addUser = async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
 
@@ -11,7 +11,7 @@ exports.addUser = async (req, res) => {
           message: 'You need to enter all the fields'
         })
       }
-
+      //saltar det lösenord som en användare 10 ggr = krypterar ett lösenord för säkerhetskäl
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
 
@@ -22,7 +22,7 @@ exports.addUser = async (req, res) => {
     res.status(201).json(auth.generateToken(user))
 
 }
-
+//Funktion som loggar in en användare
 exports.login = async (req, res) => {
     const { email, password } = req.body;
 
@@ -31,7 +31,7 @@ exports.login = async (req, res) => {
             message: 'You need to enter all fields'
         })
     }
-
+    //Letar efter den email som användaren försöker logga in med
     const user = await User.findOne({ email }) 
 
         if(!user) {
@@ -39,11 +39,11 @@ exports.login = async (req, res) => {
                 message: 'Email doesnt exist'
             })
         }
-
+        //Jämför lösenord som användaren skriver in med det krypterade lösenordet för att se om det matchar
         const result = await bcrypt.compare(password, user.passwordHash)
             if(!result) {
                 return res.status(401).json({
-                  message: 'Incorrect credentials'
+                  message: 'email or password doesnt exist'
                 })
               }
 

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
+//Schema för att lägga till böcker
 const bookSchema = new Schema({
     name:         { type: String, required: true },
     description:  { type: String, required: true },
